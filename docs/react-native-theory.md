@@ -89,3 +89,26 @@ Android and iOS.
 - Ready-to-use components reduce boilerplate
 - Built-in dark and light theme support via PaperProvider
 - Well maintained with active community support
+
+## Navigation patterns
+
+### Tabs
+Used for the main navigation between Notes, Checklists and Ideas.
+Tabs are always visible and let the user switch between sections
+instantly without losing state. Ideal for top-level sections of
+equal importance.
+
+### Stack
+Used for drilling into detail screens within a tab (e.g. note detail).
+Each screen is pushed onto a stack and the user navigates back with
+the back button or swipe gesture.
+
+### Modal
+Used for the new note creation screen. A modal slides up from the
+bottom and focuses the user on a single task. It can be dismissed
+without affecting the tab state underneath.
+
+**Why this combination:**
+- Tabs for the three main sections — always accessible
+- Stack inside each tab for detail navigation
+- Modal for creation — focused, dismissable, does not break tab flow
