@@ -129,3 +129,28 @@ if (isChecklistNote(note)) {
 The `'items' in note` check returns `true` only if the object has an
 `items` property — which only `ChecklistNote` has. This is safer than
 casting with `as` because it actually verifies the shape at runtime.
+
+## State management
+
+### useState
+Local component state. Good for UI-only state like modal open/close,
+input focus, or loading indicators. Not suitable for data shared
+between screens.
+
+### Context API
+Built into React. Shares state across the component tree without
+prop drilling. Requires a Provider wrapper and causes all consumers
+to re-render when the context value changes — even if the component
+only uses one field of a large object.
+
+### Zustand
+A minimal state management library. No providers needed — any component
+can subscribe to the store directly. Only components that use a specific
+slice of state re-render when that slice changes.
+
+**Why Zustand for NoteFlow:**
+- Notes, checklists and ideas are shared across tabs and screens
+- No provider boilerplate needed in _layout.tsx
+- Selective re-renders — NoteCard only re-renders if its note changes
+- Simple API — create a store, call actions, done
+- Integrates directly with AsyncStorage via persist middleware
