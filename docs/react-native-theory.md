@@ -112,3 +112,20 @@ without affecting the tab state underneath.
 - Tabs for the three main sections — always accessible
 - Stack inside each tab for detail navigation
 - Modal for creation — focused, dismissable, does not break tab flow
+
+## TypeScript type guards
+
+The `AnyNote` union type allows writing functions that accept any note type.
+At runtime, TypeScript cannot know which specific type a value is — type
+guards solve this by checking for a property that only exists on one type.
+
+```ts
+if (isChecklistNote(note)) {
+  // TypeScript knows note is ChecklistNote here
+  note.items.forEach(item => console.log(item.text))
+}
+```
+
+The `'items' in note` check returns `true` only if the object has an
+`items` property — which only `ChecklistNote` has. This is safer than
+casting with `as` because it actually verifies the shape at runtime.
