@@ -154,3 +154,20 @@ slice of state re-render when that slice changes.
 - Selective re-renders — NoteCard only re-renders if its note changes
 - Simple API — create a store, call actions, done
 - Integrates directly with AsyncStorage via persist middleware
+
+## List performance
+
+### FlatList limitations
+FlatList recycles components but has a known issue with long lists:
+it renders too many items off-screen and shows blank areas during
+fast scroll because the recycling window is too small.
+
+### FlashList
+FlashList by Shopify fixes this by recycling components more aggressively.
+The key property is `estimatedItemSize` — it tells FlashList how much
+space each item will take before rendering it. A precise value means
+FlashList can calculate the scroll position accurately and recycle
+components at the right moment, eliminating blank scroll areas.
+
+For NoteFlow, `estimatedItemSize={90}` is used for all three list types
+as cards are approximately 90px tall.
